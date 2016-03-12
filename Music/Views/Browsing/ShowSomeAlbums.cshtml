@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Music.Models.Album>
+
+@{
+    ViewBag.Title = "genre";
+}
+
+<h2>Genre Albums</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Title, "Details", new {id = item.AlbumID})
+            </td>
+        </tr>
+    }
+
+</table>
+<br>@Html.ActionLink("Back to List", "genre")
