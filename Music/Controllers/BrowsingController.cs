@@ -27,6 +27,12 @@ namespace Music.Controllers
             return View(albums.ToList());
         }
 
+        public ActionResult playlist()
+        {
+            var albums = db.Playlists;
+            return View(albums.ToList());
+        }
+
         // GET: Albums/Details/5
         public ActionResult Details(int? id)
         {
@@ -41,7 +47,21 @@ namespace Music.Controllers
             }
             return View(album);
         }
+        // GET: Albums/Details/5
 
+        public ActionResult Details2(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Album album = db.Albums.Include(a => a.Playlist).Include(a => a.Genre).Where(a => a.AlbumID == id).Single();
+            if (album == null)
+            {
+                return HttpNotFound();
+            }
+            return View(album);
+        }
         // GET: Albums/Create
         public ActionResult Create()
         {
@@ -57,6 +77,10 @@ namespace Music.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "GenreID,Name")] Genre genre)
         {
+            if (db.Genres.Any(ac => ac.Name.Equals(genre.Name)))
+            {
+                return View();
+            }
             if (ModelState.IsValid)
             {
                 db.Genres.Add(genre);
@@ -72,7 +96,7 @@ namespace Music.Controllers
         // GET: Albums/Create
         public ActionResult Create2()
         {
-            ViewBag.ArtistID = new SelectList(db.Artists, "ArtistID", "Name");
+            ViewBag.ArtistID = new SelectList(db.Artists, "ArtistID", "Name", "Bio");
             return View();
         }
 
@@ -81,8 +105,12 @@ namespace Music.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create2([Bind(Include = "ArtistID,Name")] Artist artist)
+        public ActionResult Create2([Bind(Include = "ArtistID,Name,Bio")] Artist artist)
         {
+            if (db.Artists.Any(ac => ac.Name.Equals(artist.Name)))
+            {
+                return View();
+            }
             if (ModelState.IsValid)
             {
                 db.Artists.Add(artist);
@@ -90,8 +118,37 @@ namespace Music.Controllers
                 return RedirectToAction("artist");
             }
 
-            ViewBag.ArtistID = new SelectList(db.Artists, "ArtistID", "Name", artist.ArtistID);
+            ViewBag.ArtistID = new SelectList(db.Artists, "ArtistID", "Name", "Bio", artist.ArtistID);
             return View(artist);
+        }
+
+        // GET: Albums/Create
+        public ActionResult Create3()
+        {
+            ViewBag.ArtistID = new SelectList(db.Playlists, "PlaylistID", "Name");
+            return View();
+        }
+
+        // POST: Albums/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create3([Bind(Include = "PlaylistID,Name")] Playlist playlist)
+        {
+            if (db.Playlists.Any(ac => ac.Name.Equals(playlist.Name)))
+            {
+                return View();
+            }
+            if (ModelState.IsValid)
+            {
+                db.Playlists.Add(playlist);
+                db.SaveChanges();
+                return RedirectToAction("playlist");
+            }
+
+            ViewBag.ArtistID = new SelectList(db.Playlists, "PlaylistID", "Name", playlist.PlaylistID);
+            return View(playlist);
         }
 
         public ActionResult ShowSomeAlbums(int id)

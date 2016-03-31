@@ -16,13 +16,12 @@
         </th>
     </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.ActionLink(item.Name, "ShowSomeAlbums2", new { id = item.ArtistID })
-            </td>
-        </tr>
-    }
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.Name, "ShowSomeAlbums2", new { id = item.ArtistID })
+        </td>
+    </tr>
+}
 
 </table>

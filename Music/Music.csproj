@@ -154,7 +154,52 @@
     <Compile Include="Migrations\201603101655105_m2.Designer.cs">
       <DependentUpon>201603101655105_m2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603120244471_ghm1.cs" />
+    <Compile Include="Migrations\201603120244471_ghm1.Designer.cs">
+      <DependentUpon>201603120244471_ghm1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603241751077_modelUpdate.cs" />
+    <Compile Include="Migrations\201603241751077_modelUpdate.Designer.cs">
+      <DependentUpon>201603241751077_modelUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603271809246_ArtistRequired.cs" />
+    <Compile Include="Migrations\201603271809246_ArtistRequired.Designer.cs">
+      <DependentUpon>201603271809246_ArtistRequired.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603271816299_undoArtist.cs" />
+    <Compile Include="Migrations\201603271816299_undoArtist.Designer.cs">
+      <DependentUpon>201603271816299_undoArtist.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603272018438_ArtistRequiredV2.1.cs" />
+    <Compile Include="Migrations\201603272018438_ArtistRequiredV2.1.Designer.cs">
+      <DependentUpon>201603272018438_ArtistRequiredV2.1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603282130292_ArtistRequiredV2.2.cs" />
+    <Compile Include="Migrations\201603282130292_ArtistRequiredV2.2.Designer.cs">
+      <DependentUpon>201603282130292_ArtistRequiredV2.2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603291856345_PlaylistIdAdd.cs" />
+    <Compile Include="Migrations\201603291856345_PlaylistIdAdd.Designer.cs">
+      <DependentUpon>201603291856345_PlaylistIdAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603292335197_PlaylistAdded.cs" />
+    <Compile Include="Migrations\201603292335197_PlaylistAdded.Designer.cs">
+      <DependentUpon>201603292335197_PlaylistAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603302355229_Many2Many.cs" />
+    <Compile Include="Migrations\201603302355229_Many2Many.Designer.cs">
+      <DependentUpon>201603302355229_Many2Many.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603311506400_Many2Many1.cs" />
+    <Compile Include="Migrations\201603311506400_Many2Many1.Designer.cs">
+      <DependentUpon>201603311506400_Many2Many1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603312057304_quickchange.cs" />
+    <Compile Include="Migrations\201603312057304_quickchange.Designer.cs">
+      <DependentUpon>201603312057304_quickchange.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Playlist.cs" />
     <Compile Include="Models\Album.cs" />
     <Compile Include="Models\Artist.cs" />
     <Compile Include="Models\Genre.cs" />
@@ -210,7 +255,10 @@
     <Content Include="Views\Browsing\Create2.cshtml" />
     <Content Include="Views\Browsing\ShowSomeAlbums.cshtml" />
     <Content Include="Views\Browsing\ShowSomeAlbums2.cshtml" />
+    <Content Include="Views\Browsing\playlist.cshtml" />
+    <Content Include="Views\Browsing\Create3.cshtml" />
     <Content Include="Views\Browsing\Details2.cshtml" />
+    <Content Include="Views\Albums\Add2Playlist.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -238,6 +286,39 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603101655105_m2.resx">
       <DependentUpon>201603101655105_m2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603120244471_ghm1.resx">
+      <DependentUpon>201603120244471_ghm1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603241751077_modelUpdate.resx">
+      <DependentUpon>201603241751077_modelUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603271809246_ArtistRequired.resx">
+      <DependentUpon>201603271809246_ArtistRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603271816299_undoArtist.resx">
+      <DependentUpon>201603271816299_undoArtist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603272018438_ArtistRequiredV2.1.resx">
+      <DependentUpon>201603272018438_ArtistRequiredV2.1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603282130292_ArtistRequiredV2.2.resx">
+      <DependentUpon>201603282130292_ArtistRequiredV2.2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603291856345_PlaylistIdAdd.resx">
+      <DependentUpon>201603291856345_PlaylistIdAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603292335197_PlaylistAdded.resx">
+      <DependentUpon>201603292335197_PlaylistAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603302355229_Many2Many.resx">
+      <DependentUpon>201603302355229_Many2Many.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603311506400_Many2Many1.resx">
+      <DependentUpon>201603311506400_Many2Many1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603312057304_quickchange.resx">
+      <DependentUpon>201603312057304_quickchange.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

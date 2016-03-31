@@ -13,15 +13,23 @@
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Artist)
+            <!--Html.ActionLink(modelItem => item.Artist, "Artist", new {id = item.AlbumID})-->
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Genre)
+            <!--Html.ActionLink(modelItem => item.Genre, "Genre", new {id = item.AlbumID})-->
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Title)
+            <!--Html.ActionLink(modelItem => item.Title, "Title", new {id = item.AlbumID})-->
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Price)
+            <!--Html.ActionLink(modelItem => item.Price, "Price", new {id = item.AlbumID})-->
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Likes)
+            <!--Html.ActionLink(modelItem => item.Likes, "Likes", new {id = item.AlbumID})-->
         </th>
         <th></th>
     </tr>
@@ -42,6 +50,11 @@
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.Likes)
+            @Html.ActionLink("Like", "IndexLiked", new { id = item.AlbumID })
+        </td>
+        <td>
+            @Html.ActionLink("Add to a Playlist", "Add2Playlist", new { id = item.AlbumID }) |<!---->
             @Html.ActionLink("Edit", "Edit", new { id=item.AlbumID }) |
             @Html.ActionLink("Details", "Details", new { id=item.AlbumID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.AlbumID })

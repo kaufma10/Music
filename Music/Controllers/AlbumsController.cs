@@ -21,6 +21,20 @@ namespace Music.Controllers
             return View(albums.ToList());
         }
 
+        public ActionResult IndexLiked(int? id)
+        {
+            if (ModelState.IsValid)
+            {
+                Album album = db.Albums.Include(a => a.Artist).Include(a => a.Genre).Where(a => a.AlbumID == id).Single();
+                db.Entry(album).State = EntityState.Modified;
+                album.Likes++;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            var albums = db.Albums.Include(a => a.Artist).Include(a => a.Genre);
+            return View(albums.ToList());
+        }/**/
+
         // GET: Albums/Details/5
         public ActionResult Details(int? id)
         {
@@ -85,7 +99,7 @@ namespace Music.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AlbumID,Title,GenreID,Price,ArtistID")] Album album)
+        public ActionResult Edit([Bind(Include = "AlbumID,Title,GenreID,Price,Likes,ArtistID")] Album album)
         {
             if (ModelState.IsValid)
             {
@@ -95,6 +109,41 @@ namespace Music.Controllers
             }
             ViewBag.ArtistID = new SelectList(db.Artists, "ArtistID", "Name", album.ArtistID);
             ViewBag.GenreID = new SelectList(db.Genres, "GenreID", "Name", album.GenreID);
+            return View(album);
+        }
+
+        // GET: Albums/Edit/5
+        public ActionResult Add2Playlist(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Album album = db.Albums.Find(id);
+            if (album == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.PlaylistID = new SelectList(db.Playlists, "PlaylistID", "Name", album.Playlist);
+            ViewBag.AlbumID = new SelectList(db.Albums, "AlbumID", "Title", album.AlbumID);
+            return View(album);
+        }
+
+        // POST: Albums/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add2Playlist([Bind(Include = "AlbumID,Title,GenreID,Price,Likes,ArtistID")] Album album)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(album).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.PlaylistID = new SelectList(db.Playlists, "PlaylistID", "Name", album.Playlist);
+            ViewBag.AlbumID = new SelectList(db.Albums, "AlbumID", "Title", album.AlbumID);
             return View(album);
         }
 

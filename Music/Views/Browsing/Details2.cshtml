@@ -1,49 +1,36 @@
 ﻿@model Music.Models.Album
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Details2";
 }
 
 <h2>Details</h2>
 
 <div>
-    <h4>Album</h4>
+    <h4>Playlist</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Artist)
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Artist.Name)
+            @Html.DisplayFor(model => model.Name)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Genre)
-        </dt>
+        @foreach (var item in Model.Albums)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Albums)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Genre.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Albums)
+            </dd>
+        }
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Back to List", "ShowSomeAlbums2")
+    @Html.ActionLink("Back to List", "playlist")
 </p>
