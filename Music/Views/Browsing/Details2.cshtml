@@ -1,4 +1,4 @@
-﻿@model Music.Models.Album
+﻿@model Music.Models.Playlist
 
 @{
     ViewBag.Title = "Details2";
@@ -18,14 +18,15 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Albums)
+        </dt>
+
         @foreach (var item in Model.Albums)
         {
-            <dt>
-                @Html.DisplayNameFor(model => model.Albums)
-            </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Albums)
+                @Html.DisplayFor(model => item.Title)
             </dd>
         }
 

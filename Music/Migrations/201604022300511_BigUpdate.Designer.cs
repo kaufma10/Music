@@ -7,13 +7,13 @@ namespace Music.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class PlaylistAdded : IMigrationMetadata
+    public sealed partial class BigUpdate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(PlaylistAdded));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(BigUpdate));
         
         string IMigrationMetadata.Id
         {
-            get { return "201603292335197_PlaylistAdded"; }
+            get { return "201604022300511_BigUpdate"; }
         }
         
         string IMigrationMetadata.Source

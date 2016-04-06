@@ -9,57 +9,96 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+<p>      
+     @using (Html.BeginForm("Index", "Albums/Index", FormMethod.Get)){
+         <p> @Html.TextBox("SearchString")  
+         <input type="submit" value="Search" /></p> 
+        } 
+</p>
+<style type="text/css">
+        .table { margin: 4px;  width: 500px;  background-color:#ff6a00}
+        .head { background-color: #C1D4E6; font-weight: bold; color: #FFF; }
+        .webGrid th, .webGrid td { border: 3px solid #C0C0C0; padding: 5px; }
+        .altRow { background-color: #E4E9F5; color: #000; }
+        .gridHead a:hover {text-decoration:underline;}
+        .description { width:auto}
+        .selectRow{background-color: #389DF5}
+    </style>
+@{
+    var grid = new WebGrid(Model, rowsPerPage: 5);
+ }
+@grid.GetHtml(tableStyle: "gridTable",
+    headerStyle: "gridHead",
+    footerStyle: "gridFooter",
+    rowStyle: "gridRow",
+    alternatingRowStyle: "gridAltRow", columns: grid.Columns(
+ grid.Column("Artist", header: "Artist",
+ format: @<text>@((string)item.Artist.Name) @Html.ActionLink(
+            "Artist", "Index", new { sortOrder = ViewBag.ArtistSortParm })</text>),
+ grid.Column("Genre", header: "Genre",
+ format: @<text>@((string)item.Genre.Name) @Html.ActionLink(
+            "Genre", "Index", new { sortOrder = ViewBag.GenreSortParm })</text>),
+ grid.Column("Title"),
+ grid.Column("Price"),
+ grid.Column("Likes"),
+ grid.Column("Likes", format: @<text>@Html.ActionLink(
+            "Likes", "IndexLiked", new { id = item.AlbumID }, null)</text>),
+ grid.Column("Add to a Playlist", format: @<text>@Html.ActionLink(
+            "Add to a Playlist", "Add2Playlist", new { id = item.AlbumID }, null)</text>),
+ grid.Column("Details", format: @<text>@Html.ActionLink(
+            "Details", "Details", new { id = item.AlbumID }, null)</text>),
+ grid.Column("Edit", format: @<text>@Html.ActionLink(
+            "Edit", "Edit", new { id = item.AlbumID }, null)</text>),
+  grid.Column("Delete", format: @<text>@Html.ActionLink(
+            "Delete", "Delete", new { id = item.AlbumID }, null)</text>)
+ )
+)<!--
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Artist)
-            <!--Html.ActionLink(modelItem => item.Artist, "Artist", new {id = item.AlbumID})-->
+            Html.ActionLink("Artist", "Index", new { sortOrder = ViewBag.ArtistSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Genre)
-            <!--Html.ActionLink(modelItem => item.Genre, "Genre", new {id = item.AlbumID})-->
+            Html.ActionLink("Genre", "Index", new { sortOrder = ViewBag.GenreSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
-            <!--Html.ActionLink(modelItem => item.Title, "Title", new {id = item.AlbumID})-->
+            Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.TitleSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
-            <!--Html.ActionLink(modelItem => item.Price, "Price", new {id = item.AlbumID})-->
+            Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Likes)
-            <!--Html.ActionLink(modelItem => item.Likes, "Likes", new {id = item.AlbumID})-->
+            Html.ActionLink("Likes", "Index", new { sortOrder = ViewBag.LikesSortParm })
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Artist.Name)
+            Html.DisplayFor(modelItem => item.Artist.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Genre.Name)
+            Html.DisplayFor(modelItem => item.Genre.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Title)
+            Html.DisplayFor(modelItem => item.Title)
             <!--Html.ActionLink(modelItem => item.Title, "Details", new {id = item.AlbumID})-->
+        <!--</td>
+        <td>
+            Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Price)
+            Html.DisplayFor(modelItem => item.Likes)
+            Html.ActionLink("Like", "IndexLiked", new { id = item.AlbumID })
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Likes)
-            @Html.ActionLink("Like", "IndexLiked", new { id = item.AlbumID })
-        </td>
-        <td>
-            @Html.ActionLink("Add to a Playlist", "Add2Playlist", new { id = item.AlbumID }) |<!---->
-            @Html.ActionLink("Edit", "Edit", new { id=item.AlbumID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.AlbumID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.AlbumID })
+            Html.ActionLink("Add to a Playlist", "Add2Playlist", new { id = item.AlbumID }) |
+            Html.ActionLink("Edit", "Edit", new { id=item.AlbumID }) |
+            Html.ActionLink("Details", "Details", new { id=item.AlbumID }) |
+            Html.ActionLink("Delete", "Delete", new { id=item.AlbumID })
         </td>
     </tr>
 }
 
-</table>
+</table>-->

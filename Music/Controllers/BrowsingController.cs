@@ -55,7 +55,7 @@ namespace Music.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = db.Albums.Include(a => a.Playlist).Include(a => a.Genre).Where(a => a.AlbumID == id).Single();
+            Playlist album = db.Playlists.Include(a => a.Albums).Where(a => a.PlaylistID == id).Single();
             if (album == null)
             {
                 return HttpNotFound();

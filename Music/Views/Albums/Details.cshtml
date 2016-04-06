@@ -57,6 +57,17 @@
         <dd>
             @Html.DisplayFor(model => model.Likes)
         </dd><!---->
+        Suggested Albums<br>
+        @{
+            foreach (var item in @ViewBag.Reccomendations) {
+                    @Html.DisplayFor(modelItem => item)<br>
+                    //Html.DisplayFor(modelItem => item)<br>
+            }
+         }
+        <!--Html.ActionLink("More of this Genre", "ShowSomeAlbums", "Browsing", new { id = Model.Genre.GenreID }, null)
+        <br></br>
+        Html.DisplayFor(model => model.Artist.Name)
+        Html.ActionLink("More by this Artist", "ShowSomeAlbums2", "Browsing", new { id = Model.Artist.ArtistID }, null)-->
     </dl>
 </div>
 <p>

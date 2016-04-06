@@ -7,13 +7,13 @@ namespace Music.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Many2Many1 : IMigrationMetadata
+    public sealed partial class UpdateBerroa : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Many2Many1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(UpdateBerroa));
         
         string IMigrationMetadata.Id
         {
-            get { return "201603311506400_Many2Many1"; }
+            get { return "201604040023229_UpdateBerroa"; }
         }
         
         string IMigrationMetadata.Source

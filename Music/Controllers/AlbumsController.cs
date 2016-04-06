@@ -15,9 +15,56 @@ namespace Music.Controllers
         private MusicContext db = new MusicContext();
 
         // GET: Albums
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString)
         {
+            ViewBag.TitleSortParm = String.IsNullOrEmpty(sortOrder) ? "TitleDesc" : "";
+            ViewBag.ArtistSortParm = sortOrder == "Artist" ? "ArtistDesc" : "Artist";
+            ViewBag.GenreSortParm = sortOrder == "Genre" ? "GenreDesc" : "Genre";
+            ViewBag.PriceSortParm = sortOrder == "Price" ? "PriceDesc" : "Price";
+            ViewBag.LikesSortParm = sortOrder == "Likes" ? "LikesDesc" : "Likes";
+
             var albums = db.Albums.Include(a => a.Artist).Include(a => a.Genre);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                albums = albums.Where(s => s.Title.Contains(searchString) || s.Artist.Name.Contains(searchString)
+                || s.Genre.Name.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "TitleDesc":
+                    albums = albums.OrderByDescending(s => s.Title);
+                    break;
+                case "Title":
+                    albums = albums.OrderBy(s => s.Title);
+                    break;
+                case "Artist":
+                    albums = albums.OrderBy(s => s.Artist.Name);
+                    break;
+                case "ArtistDesc":
+                    albums = albums.OrderByDescending(s => s.Artist.Name);
+                    break;
+                case "Genre":
+                    albums = albums.OrderBy(s => s.Genre.Name);
+                    break;
+                case "GenreDesc":
+                    albums = albums.OrderByDescending(s => s.Genre.Name);
+                    break;
+                case "Price":
+                    albums = albums.OrderBy(s => s.Price);
+                    break;
+                case "PriceDesc":
+                    albums = albums.OrderByDescending(s => s.Price);
+                    break;
+                case "Likes":
+                    albums = albums.OrderBy(s => s.Likes);
+                    break;
+                case "LikesDesc":
+                    albums = albums.OrderByDescending(s => s.Likes);
+                    break;
+                default:
+                    albums = albums.OrderBy(s => s.Title);
+                    break;
+            }
             return View(albums.ToList());
         }
 
@@ -33,7 +80,7 @@ namespace Music.Controllers
             }
             var albums = db.Albums.Include(a => a.Artist).Include(a => a.Genre);
             return View(albums.ToList());
-        }/**/
+        }
 
         // GET: Albums/Details/5
         public ActionResult Details(int? id)
@@ -47,6 +94,8 @@ namespace Music.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Reccomendations = db.Albums.Where(a => a.Artist.ArtistID == album.ArtistID
+            || a.Genre.GenreID == album.GenreID).ToList();
             return View(album);
         }
 
@@ -126,7 +175,12 @@ namespace Music.Controllers
             }
             ViewBag.PlaylistID = new SelectList(db.Playlists, "PlaylistID", "Name", album.Playlist);
             ViewBag.AlbumID = new SelectList(db.Albums, "AlbumID", "Title", album.AlbumID);
-            return View(album);
+            NewModel viewModel = new NewModel() {
+                AlbumID = album.AlbumID,
+                Playlist = ViewBag.PlayListID,
+                Title = album.Title
+            };
+            return View(viewModel);
         }
 
         // POST: Albums/Edit/5
@@ -134,17 +188,24 @@ namespace Music.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add2Playlist([Bind(Include = "AlbumID,Title,GenreID,Price,Likes,ArtistID")] Album album)
+        public ActionResult Add2Playlist(NewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(album).State = EntityState.Modified;
+                Album album = db.Albums.Find(viewModel.AlbumID);
+                Playlist pList = db.Playlists.Find(viewModel.PlayListId);
+                if (pList.Albums == null)
+                {
+                    pList.Albums = new List<Album>();
+                }
+                pList.Albums.Add(album);
+                db.Entry(pList).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.PlaylistID = new SelectList(db.Playlists, "PlaylistID", "Name", album.Playlist);
-            ViewBag.AlbumID = new SelectList(db.Albums, "AlbumID", "Title", album.AlbumID);
-            return View(album);
+            ViewBag.PlaylistID = new SelectList(db.Playlists, "PlaylistID", "Name", viewModel.Playlist);
+            ViewBag.AlbumID = new SelectList(db.Albums, "AlbumID", "Title", viewModel.AlbumID);
+            return View(viewModel);
         }
 
         // GET: Albums/Delete/5

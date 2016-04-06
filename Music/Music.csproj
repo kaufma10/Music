@@ -178,27 +178,20 @@
     <Compile Include="Migrations\201603282130292_ArtistRequiredV2.2.Designer.cs">
       <DependentUpon>201603282130292_ArtistRequiredV2.2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201603291856345_PlaylistIdAdd.cs" />
-    <Compile Include="Migrations\201603291856345_PlaylistIdAdd.Designer.cs">
-      <DependentUpon>201603291856345_PlaylistIdAdd.cs</DependentUpon>
+    <Compile Include="Migrations\201604022300511_BigUpdate.cs" />
+    <Compile Include="Migrations\201604022300511_BigUpdate.Designer.cs">
+      <DependentUpon>201604022300511_BigUpdate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201603292335197_PlaylistAdded.cs" />
-    <Compile Include="Migrations\201603292335197_PlaylistAdded.Designer.cs">
-      <DependentUpon>201603292335197_PlaylistAdded.cs</DependentUpon>
+    <Compile Include="Migrations\201604022328315_PlayNameNeeded.cs" />
+    <Compile Include="Migrations\201604022328315_PlayNameNeeded.Designer.cs">
+      <DependentUpon>201604022328315_PlayNameNeeded.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201603302355229_Many2Many.cs" />
-    <Compile Include="Migrations\201603302355229_Many2Many.Designer.cs">
-      <DependentUpon>201603302355229_Many2Many.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603311506400_Many2Many1.cs" />
-    <Compile Include="Migrations\201603311506400_Many2Many1.Designer.cs">
-      <DependentUpon>201603311506400_Many2Many1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603312057304_quickchange.cs" />
-    <Compile Include="Migrations\201603312057304_quickchange.Designer.cs">
-      <DependentUpon>201603312057304_quickchange.cs</DependentUpon>
+    <Compile Include="Migrations\201604040023229_UpdateBerroa.cs" />
+    <Compile Include="Migrations\201604040023229_UpdateBerroa.Designer.cs">
+      <DependentUpon>201604040023229_UpdateBerroa.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\NewModel.cs" />
     <Compile Include="Models\Playlist.cs" />
     <Compile Include="Models\Album.cs" />
     <Compile Include="Models\Artist.cs" />
@@ -305,20 +298,14 @@
     <EmbeddedResource Include="Migrations\201603282130292_ArtistRequiredV2.2.resx">
       <DependentUpon>201603282130292_ArtistRequiredV2.2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603291856345_PlaylistIdAdd.resx">
-      <DependentUpon>201603291856345_PlaylistIdAdd.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604022300511_BigUpdate.resx">
+      <DependentUpon>201604022300511_BigUpdate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603292335197_PlaylistAdded.resx">
-      <DependentUpon>201603292335197_PlaylistAdded.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604022328315_PlayNameNeeded.resx">
+      <DependentUpon>201604022328315_PlayNameNeeded.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603302355229_Many2Many.resx">
-      <DependentUpon>201603302355229_Many2Many.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603311506400_Many2Many1.resx">
-      <DependentUpon>201603311506400_Many2Many1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603312057304_quickchange.resx">
-      <DependentUpon>201603312057304_quickchange.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604040023229_UpdateBerroa.resx">
+      <DependentUpon>201604040023229_UpdateBerroa.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

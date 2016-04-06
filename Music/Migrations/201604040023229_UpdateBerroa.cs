@@ -3,7 +3,7 @@ namespace Music.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class PlaylistIdAdd : DbMigration
+    public partial class UpdateBerroa : DbMigration
     {
         public override void Up()
         {
